@@ -11,4 +11,11 @@
 from user import User
 
 class Player(User):
-	pass
+
+	code = ""
+
+	def __init__(self, name):
+		User.__init__(self, name)
+
+	def set_code(self, code):
+		self.code = code

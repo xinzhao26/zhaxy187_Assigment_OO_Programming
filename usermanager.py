@@ -14,7 +14,7 @@ from userinterfacemanager import UserInterfaceManager
 
 class UserManager:
 
-    users = []
+    users = [User('HAL9000'), User('VIKI')]
 
     def __init__(self):
         self.userinterfacemanager = UserInterfaceManager()

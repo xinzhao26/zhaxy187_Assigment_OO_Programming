@@ -21,6 +21,7 @@ class PlayerManager:
 	def __init__(self, user_manager):
 		self.userinterfacemanager = UserInterfaceManager()
 		self.number_of_players = 0
+		self.number_of_attempts = 0
 		self.user_manager = user_manager
 
 	def set_number_of_players(self, number_of_players):
@@ -28,6 +29,9 @@ class PlayerManager:
 
 	def get_number_of_players(self):
 		return self.number_of_players
+
+	def get_players(self):
+		return self.players
 
 	def register_player(self, player_name): 
 		registered_successfully = False
@@ -40,4 +44,20 @@ class PlayerManager:
 			self.userinterfacemanager.display_message('Invalid user name')
 		print('')
 		return registered_successfully
-	
+
+	def set_up_players(self):
+		player_index = 1
+		while(player_index <= self.get_number_of_players()):
+			player_name = input('What is the name of player #'+str(player_index)+"\n")
+			if self.register_player(player_name):
+				player_index += 1
+		
+		while self.number_of_attempts < 5 or self.number_of_attempts > 10:
+			try:
+				self.number_of_attempts = int(input('How many attempts will be allowed for each player (5-10)\n'))
+				if(self.number_of_attempts < 5 or self.number_of_attempts > 10):
+					raise ValueError('')
+			except ValueError:
+				self.userinterfacemanager.display_message('\nPlease enter a valid number between 5 and 10')
+			except:
+				self.userinterfacemanager.display_message('\nInvalid input')
